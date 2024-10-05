@@ -7,7 +7,7 @@ import { useState } from "react";
 function App() {
   const [screen, setScreen] = useState("login");
   return (
-    <div>
+    <div className="bg-white">
       <header className="w-full px-4">
         <img src={Logo} className="w-16 h-16" />
       </header>
