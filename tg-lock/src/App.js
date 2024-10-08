@@ -1,21 +1,16 @@
 import "./App.css";
 import Logo from "../src/logo.jpg";
-import Login from "./pages/Login.jsx";
-import SignUp from "./pages/Signup.jsx";
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
-function App() {
-  const [screen, setScreen] = useState("login");
+function App({ children }) {
   return (
     <div className="bg-white">
       <header className="w-full px-4">
-        <img src={Logo} className="w-16 h-16" />
+        <Link to="/">
+          <img src={Logo} className="w-16 h-16" />
+        </Link>
       </header>
-      {screen === "login" ? (
-        <Login onSignUp={() => setScreen("signup")} />
-      ) : (
-        <SignUp onSignUp={() => setScreen("login")} />
-      )}
+      {children}
     </div>
   );
 }

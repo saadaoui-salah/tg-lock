@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Login = ({ onSignUp }) => {
   return (
     <div className="w-full h-[90vh] flex items-center justify-center">
@@ -20,9 +22,9 @@ const Login = ({ onSignUp }) => {
         </button>
         <p className="text-sm text-gray-500">
           Don't have an account?{" "}
-          <a href="#" onClick={onSignUp} className="text-blue-500">
+          <Link to="/signup" className="text-blue-500">
             Sing Up
-          </a>
+          </Link>
         </p>
       </div>
     </div>

@@ -1,4 +1,6 @@
-const SignUp = ({ onSignUp }) => {
+import { Link } from "react-router-dom";
+
+const SignUp = () => {
   return (
     <div className="w-full h-[90vh] flex items-center justify-center">
       <div className="shadow-lg h-[400px] px-24 border border-gray-300 py-4 rounded-md flex gap-6 flex-col items-center justify-center">
@@ -20,9 +22,9 @@ const SignUp = ({ onSignUp }) => {
         </button>
         <p className="text-sm text-gray-500">
           You have already an account?{" "}
-          <a href="#" onClick={onSignUp} className="text-blue-500">
+          <Link to="/login" className="text-blue-500">
             Login
-          </a>
+          </Link>
         </p>
       </div>
     </div>
