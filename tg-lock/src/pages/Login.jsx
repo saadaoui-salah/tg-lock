@@ -17,9 +17,12 @@ const Login = ({ onSignUp }) => {
           placeholder="Password"
           className="px-2 py-1 rounded-md text-md border "
         />
-        <button className="bg-blue-500 text-white font-bold px-12 py-1 rounded-md">
+        <Link
+          to="/"
+          className="bg-blue-500 text-white font-bold px-12 py-1 rounded-md"
+        >
           Login
-        </button>
+        </Link>
         <p className="text-sm text-gray-500">
           Don't have an account?{" "}
           <Link to="/signup" className="text-blue-500">
