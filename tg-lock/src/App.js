@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function App({ children }) {
   console.log(window.location.pathname);
   return (
-    <div className="bg-white">
+    <div className="bg-white h-[100vh]">
       <header className="w-full px-4 mb-6 flex items-center justify-between">
         <Link to="/">
           <img src={Logo} className="w-16 h-16" />
