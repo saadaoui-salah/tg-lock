@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { TOTP } from "totp-generator";
+import Logo from "../logo.jpg";
+import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
 const Dashboard = () => {
   const { otp, expires } = TOTP.generate("JBSWY3DPEHPK3PXP", { period: 60 });
@@ -25,22 +27,42 @@ const Dashboard = () => {
   }, [expires]);
 
   return (
-    <div className="w-full relative h-full">
-      <div className="w-full flex justify-end px-16">
-        <button className="text-white bg-blue-500 px-4 py-1 rounded-md shadow-md hover:shadow-sm">
+    <div className="w-full relative h-full bg-white">
+      <div className="flex items-center justify-between px-4">
+        <img src={Logo} className="w-16 h-16 rounded-full" />
+        <Link
+          to="/login"
+          className="bg-black text-white font-bold w-24 text-center py-1 rounded-md"
+        >
+          Logout
+        </Link>
+      </div>
+      <div className="w-full flex justify-end px-4 mt-12">
+        <button className="text-white bg-black w-24 py-1 rounded-md shadow-md hover:shadow-sm">
           Create App
         </button>
       </div>
-      <div className="w-full h-full py-8 px-16">
-        <Link to="/app">
-          <div className="border flex-col text-white bg-blue-500 flex shadow-md px-4 py-2 rounded-md w-60">
-            <div className="flex justify-between w-full">
+      <div className="w-full h-full py-8 px-4">
+        <Link to="#">
+          <div className="border items-center text-black bg-white w-full flex justify-between shadow-md px-4 py-2 rounded-md">
+            <div className="flex justify-between">
               <p className="font-bold">Google</p>{" "}
-              <p className="font-bold">TOTP: {otp}</p>
+              <p className="font-bold ml-2">TOTP: {otp}</p>
             </div>
-            <p>
-              Expires in: {Math.floor((timeRemaining % (1000 * 60)) / 1000)}
-            </p>
+            <CountdownCircleTimer
+              isPlaying
+              duration={60}
+              initialRemainingTime={Math.floor(
+                (timeRemaining % (1000 * 60)) / 1000
+              )}
+              onComplete={() => {
+                return { shouldRepeat: true, delay: 0 };
+              }}
+              colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
+              colorsTime={[7, 5, 2, 0]}
+              size={40}
+              strokeWidth={6}
+            ></CountdownCircleTimer>
           </div>
         </Link>
       </div>

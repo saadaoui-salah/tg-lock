@@ -14,3 +14,120 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+#loading {
+  width: 50px;
+  height: 50px;
+  margin: 30px auto;
+  position: relative;
+}
+.outer-shadow,
+.inner-shadow {
+  z-index: 4;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+.inner-shadow {
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin-left: -20px;
+  margin-top: -20px;
+  border-radius: 100%;
+  background-color: #ffffff;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+.hold {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  clip: rect(0px, 50px, 50px, 25px);
+  border-radius: 100%;
+  background-color: #fff;
+}
+.fill,
+.dot span {
+  background-color: #f50;
+}
+.fill {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  clip: rect(0px, 25px, 50px, 0px);
+}
+.left .fill {
+  z-index: 1;
+  margin-right: 1px;
+  -webkit-transform: rotate(180deg);
+  transform: rotate(var(--deg-left));
+}
+
+.right {
+  z-index: 3;
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+.right .fill {
+  transform: rotate(180deg);
+  -webkit-transform: rotate(var(--deg-right));
+}
+:root {
+  --deg-right: 180deg;
+  --deg-left: 180deg;
+}
+
+.inner-shadow img {
+  margin-left: 8px;
+  margin-top: 7px;
+}
+@mixin font-serif(
+  $name,
+  $size: false,
+  $color: false,
+  $fontStyle: false,
+  $lineHeight: false,
+  $weight: false
+) {
+  font-family: $name, sans-serif;
+  @if $size {
+    font-size: $size;
+  }
+  @if $color {
+    color: $color;
+  }
+  @if $fontStyle {
+    font-style: $fontStyle;
+  }
+  @if $lineHeight {
+    line-height: $lineHeight;
+  }
+  @if $weight {
+    font-weight: $weight;
+  }
+}
+
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.seconds {
+  position: absolute;
+  @include font-serif("Roboto", 16px, false, normal, 20px, 500);
+}
+
+.svg {
+  transform: scale(-1, 1);
+  overflow: visible;
+}
+
+.countDownContainer {
+  transform: rotate(90deg);
+}
