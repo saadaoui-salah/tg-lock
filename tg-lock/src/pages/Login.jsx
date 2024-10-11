@@ -21,11 +21,11 @@ const Login = () => {
           to="/"
           className="bg-blue-500 text-white font-bold px-12 py-1 rounded-md"
         >
-          Sing Up
+          Login
         </Link>
         <p className="text-sm text-gray-200">
           Don't have an account?
-          <Link to="/login" className="text-blue-400 ml-2">
+          <Link to="/signup" className="text-blue-400 ml-2">
             Sign Up
           </Link>
         </p>

@@ -21,7 +21,7 @@ const SignUp = () => {
           to="/"
           className="bg-blue-500 text-white font-bold px-12 py-1 rounded-md"
         >
-          Sing Up
+          Sign Up
         </Link>
         <p className="text-sm text-gray-200">
           You have already an account?{" "}
