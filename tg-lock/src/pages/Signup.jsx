@@ -5,7 +5,7 @@ const SignUp = () => {
   return (
     <div className="w-full h-[90vh] flex items-center justify-center">
       <div className="h-[400px] px-24 flex gap-6 flex-col items-center justify-center">
-        <img src={Logo} className="w-16 h-16 rounded-full" />
+        <img src={Logo} className="w-24 h-24 rounded-full" />
         <p className="text-2xl mb-6 font-bold text-white">Create an account</p>
         <input
           type="email"
@@ -24,7 +24,7 @@ const SignUp = () => {
           Sign Up
         </Link>
         <p className="text-sm text-gray-200">
-          You have already an account?{" "}
+          You already have an account?{" "}
           <Link to="/login" className="text-blue-400">
             Login
           </Link>

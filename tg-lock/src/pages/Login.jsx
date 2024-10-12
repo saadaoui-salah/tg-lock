@@ -5,7 +5,7 @@ const Login = () => {
   return (
     <div className="w-full h-[90vh] flex items-center justify-center">
       <div className="h-[400px] px-24 flex gap-6 flex-col items-center justify-center">
-        <img src={Logo} className="w-16 h-16 rounded-full" />
+        <img src={Logo} className="w-24 h-24 rounded-full" />
         <p className="text-2xl font-bold text-white">Login</p>
         <input
           type="email"

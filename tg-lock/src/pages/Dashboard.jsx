@@ -44,7 +44,7 @@ const Dashboard = () => {
       </div>
       <div className="w-full h-full py-8 px-4">
         <Link to="#">
-          <div className="border items-center text-black bg-white w-full flex justify-between shadow-md px-4 py-2 rounded-md">
+          <div className="border items-center mt-4 text-black bg-white w-full flex justify-between shadow-md px-4 py-2 rounded-md">
             <div className="flex justify-between">
               <p className="font-bold">Google</p>{" "}
               <p className="font-bold ml-2">TOTP: {otp}</p>
