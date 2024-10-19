@@ -41,7 +41,7 @@ export const useApp = () => {
         }
       })
       .then((data) => {
-        setApps(data);
+        if (data) setApps(data);
       });
   }, []);
   return { error, submit, apps };
