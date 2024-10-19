@@ -1,4 +1,3 @@
-# views.py in your app (e.g., myapp)
 
 from rest_framework import status
 from rest_framework.response import Response
