@@ -75,10 +75,12 @@ TEMPLATES = [
 ]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # React frontend
+    "http://localhost:3000", 
+    "https://tg-lock.vercel.app"
 ]
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
+    "https://tg-lock.vercel.app"
 ]
 WSGI_APPLICATION = 'core.wsgi.application'
 
