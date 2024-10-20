@@ -34,7 +34,7 @@ const Login = () => {
             }
             type={show ? "password" : "text"}
             placeholder="Password"
-            className="border-none bg-transparent w-[174px]"
+            className="border-none bg-transparent w-[180px]"
           />
           <div onClick={() => setShow(!show)}>
             {show ? <EyeSlash /> : <Eye />}
