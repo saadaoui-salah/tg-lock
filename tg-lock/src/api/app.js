@@ -11,6 +11,7 @@ export const useApp = () => {
       method: "POST",
       headers: {
         "content-type": "application/json",
+        Authorization: localStorage.getItem("refresh"),
       },
       credentials: "include",
       body: JSON.stringify(payload),
@@ -29,6 +30,7 @@ export const useApp = () => {
       method: "GET",
       headers: {
         "content-type": "application/json",
+        Authorization: localStorage.getItem("refresh"),
       },
       credentials: "include",
     })

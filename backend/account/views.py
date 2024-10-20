@@ -6,10 +6,13 @@ from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
 from .serializers import SignupSerializer, LoginSerializer
 from django.contrib.auth import get_user_model
+from rest_framework.permissions import AllowAny
 
 User = get_user_model()
 
 class SignupView(APIView):
+    permission_classes = [AllowAny]
+
     def post(self, request, *args, **kwargs):
         serializer = SignupSerializer(data=request.data)
         if serializer.is_valid():
@@ -18,19 +21,19 @@ class SignupView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class LoginView(APIView):
+    permission_classes = [AllowAny]
     def post(self, request, *args, **kwargs):
         serializer = LoginSerializer(data=request.data)
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        print(serializer.data)
         email = serializer.data['email']
         password = serializer.data['password']
 
         user = authenticate(request, email=email, password=password)
         if user is not None:
             refresh = RefreshToken.for_user(user)
-            response = Response({"message": "Login successful"}, status=status.HTTP_200_OK)
+            response = Response({"access": str(refresh.access_token), 'refresh': str(refresh)}, status=status.HTTP_200_OK)
             response.set_cookie(
                 key='access_token',
                 value=str(refresh.access_token),

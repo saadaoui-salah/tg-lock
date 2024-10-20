@@ -41,7 +41,8 @@ export const useLogin = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.message) {
+        if (data.refresh) {
+          localStorage.setItem("refresh", data.refresh);
           navigate("/");
           return;
         } else {

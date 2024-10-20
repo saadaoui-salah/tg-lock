@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-0%j#_te#41##l2-j7ak+lf1(335me177!an+lx@pwhuw+%r2at
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tg-lock-production.up.railway.app']
+ALLOWED_HOSTS = ['tg-lock-production.up.railway.app','127.0.0.1']
 
 
 # Application definition
@@ -74,6 +74,7 @@ TEMPLATES = [
     },
 ]
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000", 
     "https://tg-lock.vercel.app"
@@ -129,6 +130,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'account.backend.AccessTokenBackend',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

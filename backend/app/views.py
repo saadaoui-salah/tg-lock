@@ -21,7 +21,7 @@ class CustomIsAuthenticated(BasePermission):
 
 # ListCreateAPIView for listing and creating App instances
 class AppListCreateView(APIView):
-    permission_classes = [CustomIsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
         # Handle GET requests to list all App instances

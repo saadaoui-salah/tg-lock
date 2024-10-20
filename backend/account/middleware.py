@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 import json
 from .backend import AccessTokenBackend
 from django.utils.deprecation import MiddlewareMixin
+from rest_framework_simplejwt.tokens import RefreshToken
 
 User = get_user_model()
 
@@ -12,6 +13,11 @@ class TokenToUserMiddleware:
     def __call__(self, request):
         refresh = False
         user, refresh = AccessTokenBackend().authenticate(request)
+        refresh_token = request.META.get('HTTP_AUTHORIZATION')
+        if refresh_token and not user:
+            token = RefreshToken(refresh_token)
+            user_id = token.payload['user_id']
+            user = User.objects.filter(id=user_id).get()
         if user: 
             request.user = user
             request.is_authenticated = True
