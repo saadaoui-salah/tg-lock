@@ -25,7 +25,7 @@ class AppListCreateView(APIView):
 
     def get(self, request, *args, **kwargs):
         # Handle GET requests to list all App instances
-        apps = App.objects.all()
+        apps = App.objects.filter(user=request.user)
         serializer = AppSerializer(apps, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 

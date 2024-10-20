@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import Logo from "../logo.jpg";
 import { useLogin } from "../api/auth";
 import { useState } from "react";
+import { Eye, EyeSlash } from "../components/Icons";
 
 const Login = () => {
   const { error, submit } = useLogin();
   const [data, setData] = useState({});
+  const [show, setShow] = useState(false);
   return (
     <div className="w-full h-[90vh] flex items-center justify-center">
       <div className="h-[400px] px-24 flex gap-6 flex-col items-center justify-center">
@@ -22,17 +24,22 @@ const Login = () => {
           placeholder="Email"
           className="px-2 py-1 rounded-md text-md border text-white bg-gray-600"
         />
-        <input
-          onChange={(e) =>
-            setData({
-              ...data,
-              password: e.target.value,
-            })
-          }
-          type="password"
-          placeholder="Password"
-          className="px-2 py-1 rounded-md text-md border text-white bg-gray-600 "
-        />
+        <div className="px-2 py-1 flex items-center gap-2 rounded-md text-md border text-white bg-gray-600 ">
+          <input
+            onChange={(e) =>
+              setData({
+                ...data,
+                password: e.target.value,
+              })
+            }
+            type={show ? "password" : "text"}
+            placeholder="Password"
+            className="border-none bg-transparent w-[174px]"
+          />
+          <div onClick={() => setShow(!show)}>
+            {show ? <EyeSlash /> : <Eye />}
+          </div>
+        </div>
         <button
           onClick={() => submit(data)}
           className="bg-blue-500 text-white font-bold px-12 py-1 rounded-md"
