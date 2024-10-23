@@ -22,9 +22,9 @@ const Login = () => {
           }
           type="email"
           placeholder="Email"
-          className="px-2 py-1 rounded-md text-md border text-white bg-gray-600"
+          className="px-2 py-1 rounded-md text-md border w-[230px] text-white bg-gray-600"
         />
-        <div className="px-2 py-1 flex items-center gap-2 rounded-md text-md border text-white bg-gray-600 ">
+        <div className="px-2 py-1 flex items-center w-[230px] gap-2 rounded-md text-md border text-white bg-gray-600">
           <input
             onChange={(e) =>
               setData({

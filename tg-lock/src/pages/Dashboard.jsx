@@ -7,17 +7,18 @@ import { useApp } from "../api/app";
 import { useLogout } from "../api/auth";
 
 const Dashboard = () => {
-  const { error, submit, apps } = useApp();
+  const { error, submit, apps, deleteApp } = useApp();
+  const [selected, setSelected] = useState([]);
   const { logout } = useLogout();
   const [data, setData] = useState({});
   const [timeRemaining, setTimeRemaining] = useState(60);
   const [totps, setTotps] = useState([]);
   const generateTOTPs = () => {
-    const newTotps = apps?.map(({ secret_key, name }) => {
+    const newTotps = apps?.map(({ secret_key, name, id }) => {
       const { otp, expires } = TOTP.generate(secret_key, { period: 60 });
       const timeRemaining = expires - new Date().getTime();
       setTimeRemaining(timeRemaining);
-      return { otp, expires, secret_key, timeRemaining, name };
+      return { otp, expires, secret_key, timeRemaining, name, id };
     });
 
     setTotps(newTotps);
@@ -86,7 +87,14 @@ const Dashboard = () => {
             Logout
           </button>
         </div>
-        <div className="w-full flex justify-end px-4 mt-12">
+        <div className="w-full gap-4 flex justify-end px-4 mt-12">
+          <button
+            disabled={selected.length === 0}
+            onClick={() => deleteApp({ id: selected })}
+            className={`text-white bg-red-500 disabled:bg-red-400 disabled:shadow-none w-24 py-1 rounded-md shadow-md hover:shadow-sm`}
+          >
+            Delete
+          </button>
           <button
             onClick={() => setOpen(true)}
             className="text-white bg-black w-24 py-1 rounded-md shadow-md hover:shadow-sm"
@@ -98,28 +106,39 @@ const Dashboard = () => {
         <div className="w-full h-full text-center pt-8 px-4">
           {totps.length === 0 && <p>Create Your First App</p>}
           {totps?.map((totp) => (
-            <Link to="#">
-              <div className="border items-center mt-12 text-black bg-white w-full flex justify-between shadow-md px-4 py-2 rounded-md">
-                <div className="flex justify-between">
-                  <p className="font-bold">{totp.name}</p>{" "}
-                  <p className="font-bold ml-2">Key Code: {totp.otp}</p>
-                </div>
-                <CountdownCircleTimer
-                  isPlaying
-                  duration={60}
-                  initialRemainingTime={Math.floor(
-                    (totp.timeRemaining % (1000 * 60)) / 1000
-                  )}
-                  onComplete={() => {
-                    return { shouldRepeat: true, delay: 0 };
-                  }}
-                  colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
-                  colorsTime={[7, 5, 2, 0]}
-                  size={40}
-                  strokeWidth={6}
-                ></CountdownCircleTimer>
+            <div
+              onClick={() =>
+                setSelected(
+                  selected.includes(totp.id)
+                    ? selected.filter((i) => i !== totp.id)
+                    : [...selected, totp.id]
+                )
+              }
+              className={`border cursor-pointer ${
+                selected.includes(totp.id)
+                  ? "hover:bg-white bg-gray-200"
+                  : "hover:bg-gray-200 bg-white"
+              } items-center mt-12 text-black w-full flex justify-between shadow-md px-4 py-2 rounded-md`}
+            >
+              <div className="flex justify-between">
+                <p className="font-bold">{totp.name}</p>{" "}
+                <p className="font-bold ml-2">Key Code: {totp.otp}</p>
               </div>
-            </Link>
+              <CountdownCircleTimer
+                isPlaying
+                duration={60}
+                initialRemainingTime={Math.floor(
+                  (totp.timeRemaining % (1000 * 60)) / 1000
+                )}
+                onComplete={() => {
+                  return { shouldRepeat: true, delay: 0 };
+                }}
+                colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
+                colorsTime={[7, 5, 2, 0]}
+                size={40}
+                strokeWidth={6}
+              ></CountdownCircleTimer>
+            </div>
           ))}
         </div>
       </div>

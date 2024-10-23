@@ -13,11 +13,6 @@ class TokenToUserMiddleware:
     def __call__(self, request):
         refresh = False
         user, refresh = AccessTokenBackend().authenticate(request)
-        refresh_token = request.META.get('HTTP_AUTHORIZATION')
-        if refresh_token and not user:
-            token = RefreshToken(refresh_token)
-            user_id = token.payload['user_id']
-            user = User.objects.filter(id=user_id).get()
         if user: 
             request.user = user
             request.is_authenticated = True

@@ -59,6 +59,8 @@ class LoginView(APIView):
         return Response({"error": "Invalid email or password"}, status=status.HTTP_401_UNAUTHORIZED)
 
 class LogoutView(APIView):
+    permission_classes = [AllowAny]
+    
     def post(self, request, *args, **kwargs):
         response = Response({"message": "Logged out successfully"}, status=status.HTTP_200_OK)
         response.delete_cookie('access_token')

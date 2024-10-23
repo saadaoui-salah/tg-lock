@@ -12,7 +12,13 @@ class AccessTokenBackend(JWTAuthentication):
             token = request.COOKIES.get('access_token','')
             timestamp = request.COOKIES.get('exp','')
             refresh = request.COOKIES.get('refresh_token','')
-            
+            refresh_token = request.META.get('HTTP_AUTHORIZATION')
+            if not refresh and refresh_token:
+                token = RefreshToken(refresh_token)
+                user_id = token.payload['user_id']
+                user = User.objects.filter(id=user_id).get()
+                return (user, None)
+                
             exp = datetime.fromtimestamp(int(timestamp))
             if exp > datetime.now() and token:
                 decoded_token = self.get_validated_token(token)

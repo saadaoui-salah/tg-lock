@@ -21,7 +21,7 @@ class CustomIsAuthenticated(BasePermission):
 
 # ListCreateAPIView for listing and creating App instances
 class AppListCreateView(APIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [CustomIsAuthenticated]
 
     def get(self, request, *args, **kwargs):
         # Handle GET requests to list all App instances
@@ -37,5 +37,15 @@ class AppListCreateView(APIView):
                 user=request.user
             )
             return Response({'created': True})
+        except Exception as e :
+            return Response({'created': False, 'error': str(e)})
+
+    def delete(self, request,*args, **kwargs):
+        try:
+            for id_ in request.data['id']:
+                app = App.objects.filter(
+                    id=id_,
+                ).delete()
+            return Response({'deleted': True})
         except Exception as e :
             return Response({'created': False, 'error': str(e)})
