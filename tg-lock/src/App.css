@@ -23,7 +23,15 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+#html5qr__scan_region {
+  width: auto !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+#html5qr {
+  border: none !important;
+}
 .App-link {
   color: #61dafb;
 }
