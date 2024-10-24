@@ -116,7 +116,7 @@ const Dashboard = () => {
 
   return (
     <>
-      {scan && (
+      <div className={`${scan ? "" : "hidden"}`}>
         <PopUP close={() => setScan(false)}>
           <Html5QrcodePlugin
             fps={10}
@@ -125,7 +125,7 @@ const Dashboard = () => {
             qrCodeSuccessCallback={onNewScanResult}
           />
         </PopUP>
-      )}
+      </div>
       {open && (
         <PopUP close={() => setOpen(false)}>
           <p className="text-black mb-4 font-bold text-xl">Create App</p>
